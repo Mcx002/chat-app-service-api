@@ -15,18 +15,17 @@ export class AnonymousService {
             throw new UnauthorizedException();
         }
 
-        // validate anonymous credentials
-        const [username, password] = Buffer.from(token, 'base64').toString('utf-8').split(':')
         if (
-            username !== this.configService.get('anonymous.username') &&
-            password !== this.configService.get('anonymous.password')
+            token !== this.configService.get('anonymous.credential')
         ) {
             throw new UnauthorizedException();
         }
 
         // set anonymous token for 7 days
         const jwtToken = jwt.sign({
-            username,
+            id: "ANONYMOUS",
+            username: "anonymous",
+            name: "Anonymous",
         }, this.configService.get('jwt.secretKey'), {
             expiresIn: 60 * 60 * 24 * 7,
         })
