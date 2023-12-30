@@ -2,7 +2,6 @@
 
 import { plainToClass } from 'class-transformer';
 import {
-    IsAlpha,
     IsDefined,
     IsNumberString,
     IsString,
@@ -26,41 +25,15 @@ class EnvironmentVariables {
     @MinLength(1)
     APP_VERSION: string;
 
-    /* DATA CONFIG */
     @IsDefined()
-    @IsNumberString()
+    @IsString()
     @MinLength(1)
-    DB_PORT: string;
+    DB_URL: string;
 
     @IsDefined()
     @IsString()
     @MinLength(1)
-    DB_HOST: string;
-
-    @IsDefined()
-    @IsAlpha()
-    @MinLength(1)
-    DB_USERNAME: string;
-
-    @IsDefined()
-    @IsString()
-    @MinLength(1)
-    DB_PASSWORD: string;
-
-    @IsDefined()
-    @IsString()
-    @MinLength(1)
-    DB_NAME: string;
-
-    @IsDefined()
-    @IsString()
-    @MinLength(1)
-    ANONYMOUS_USERNAME: string;
-
-    @IsDefined()
-    @IsString()
-    @MinLength(1)
-    ANONYMOUS_PASSWORD: string;
+    ANONYMOUS_CREDENTIAL: string;
 
     @IsDefined()
     @IsString()

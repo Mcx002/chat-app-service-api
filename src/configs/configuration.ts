@@ -6,15 +6,10 @@ export default () => ({
         version: process.env.APP_VERSION || 'v0.1.0',
     },
     db: {
-        host: process.env.DB_HOST,
-        port: Number(process.env.DB_PORT),
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        name: process.env.DB_NAME,
+        url: process.env.DB_URL,
     },
     anonymous: {
-        username: process.env.ANONYMOUS_USERNAME,
-        password: process.env.ANONYMOUS_PASSWORD,
+        credential: process.env.ANONYMOUS_CREDENTIAL,
     },
     jwt: {
         secretKey: process.env.JWT_SECRET_KEY || 'test',

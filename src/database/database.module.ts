@@ -1,8 +1,8 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigsModule } from 'src/configs/configs.module';
-import { UserEntity } from 'src/users/user.entity';
+import { ConfigsModule } from '../configs/configs.module';
+import { UserEntity } from '../users/user.entity';
 
 @Module({
     imports: [
@@ -10,11 +10,8 @@ import { UserEntity } from 'src/users/user.entity';
             imports: [ConfigsModule],
             useFactory: async (configService: ConfigService) => ({
                 type: 'mongodb',
-                host: configService.get('db.host'),
-                port: configService.get('db.port'),
-                username: configService.get('db.username'),
-                password: configService.get('db.password'),
-                database: configService.get('db.name'),
+                url: configService.get('db.url'),
+                useNewUrlParser: true,
                 entities: [UserEntity],
                 synchronize: configService.get('app.env') === 'production' ? false : true,
                 authSource: 'admin',
