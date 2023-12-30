@@ -1,10 +1,10 @@
 import { AuthService } from './auth.service';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { ValidationPipe } from '../pipes/validation.pipe';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
-import { AnonymousGuard } from 'src/guards/anonymous.guard';
+import { AnonymousGuard } from '../guards/anonymous.guard';
 
 @Controller('auth')
 @UseGuards(AnonymousGuard)

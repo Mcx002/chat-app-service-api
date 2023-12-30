@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { CommonEntity } from "src/entities/common.entity";
-import { Column, Entity, ObjectIdColumn, PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "../entities/common.entity";
+import { Column, Entity, ObjectIdColumn } from "typeorm";
 
 @Entity('users')
 export class UserEntity extends CommonEntity {

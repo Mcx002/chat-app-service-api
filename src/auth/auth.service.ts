@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UsersService } from 'src/users/users.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
 import { TokenDto } from './dto/token.dto';
 import * as jwt from 'jsonwebtoken';
 import { LoginDto } from './dto/login.dto';
@@ -14,7 +14,7 @@ export class AuthService {
     ) { }
 
     async register(payload: CreateUserDto): Promise<TokenDto> {
-        const user = this.usersService.create(payload)
+        const user = await this.usersService.create(payload)
 
         const token = jwt.sign(user, this.configService.get('jwt.secretKey'), {
             expiresIn: 60 * 60 * 24 * 1,

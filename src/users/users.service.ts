@@ -4,9 +4,8 @@ import { UserEntity } from './user.entity';
 import { DataSource, Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
-import { getDateFromUnix, getUnixFromDate } from 'src/helpers/time';
+import { getDateFromUnix, getUnixFromDate } from '../helpers/time';
 import { createHash } from 'crypto';
-import { ConfigService } from '@nestjs/config';
 import { ObjectId } from 'mongodb';
 
 @Injectable()
@@ -15,7 +14,6 @@ export class UsersService {
         @InjectRepository(UserEntity)
         private usersRepository: Repository<UserEntity>,
         private dataSource: DataSource,
-        private configService: ConfigService,
     ) { }
 
     async create(payload: CreateUserDto): Promise<UserDto> {
@@ -45,9 +43,9 @@ export class UsersService {
         user.birthDate = getDateFromUnix(payload.birthDate)
         user.address = payload.address
         user.version = 1
-        await this.usersRepository.save(user)
+        const result = await this.usersRepository.save(user)
 
-        return this.composeUser(user)
+        return this.composeUser(result)
     }
 
     async findOneByUsernameOrEmail(credential: string): Promise<UserDto> {
